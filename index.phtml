@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Mon Blog</title>
+</head>
+<body>
+
+	<ul>
+		<?php foreach ($allPosts as $post) : ?>
+			<li><h1><a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a></h1></li>
+			<li><p>Auteur : <?php echo $post["author_id"] ?></p></li>
+			<li><p>Date de création : <?php echo $post["date_create"] ?></p></li>
+			<li><p><?php echo $post["content"] ?></p></li>
+			<li><a href="post.php?id=<?php echo $post["id"] ?>">Lire la suite</a></li>
+		<?php endforeach ?>
+	</ul>
+	
+</body>
+</html>
