@@ -2,16 +2,29 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>Mon Post</title>
-</head>
+	<title>Mon Blog</title>
+	<link rel="stylesheet" href="styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'></head>
 <body>
-
-	<ul>
-		<li><h1><?php echo $myPost["title"] ?></h1></li>
-		<li><p>Auteur : <?php echo $myPost["author_id"] ?></p></li>
-		<li><p>Date de création : <?php echo $myPost["date_create"] ?></p></li>
-		<li><p><?php echo $myPost["content"] ?></p></li>
-	</ul>
-	
+	<div>
+		<h1><a href="index.php">Sciences politiques <br>& Économie générale</a></h1>
+		<article>
+			<ul>
+				<li><h2><?php echo $myPost["title"] ?></h2></li>
+				<li>Auteur : <?php echo $post->getAuthorName($myPost["id"]) ?></li>
+				<li>Date de création : <?php echo $myPost["date_create"] ?></li>
+				<li><?php echo $myPost["content"] ?></li>
+			</ul>
+			<hr>
+			<ul>
+				<li>Commentaires :</li>
+				<?php foreach ($allComments as $comment) : ?>
+					<li><?php echo str_replace("\r", "<br />", $comment["content"]) ?></li>
+					<li>De : <?php echo $post->getAuthorCommentName($comment["id"]) ?>, le <?php echo $comment["date"] ?></li>
+				<?php endforeach ?>
+			</ul>
+		</article>
+		<a href="index.php">Revenir à l'accueil</a>
+	</div>
 </body>
 </html>

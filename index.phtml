@@ -3,18 +3,34 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Mon Blog</title>
+	<link rel="stylesheet" href="styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
 </head>
 <body>
+	<div>
+		<article>
+			<ul>
+				<h1><a href="index.php">Sciences politiques <br>& Économie générale</a></h1>
+				<?php foreach ($slicePosts as $post) : ?>
+					<li><h2><a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a></h2></li>
+					<li>Le <?php echo $post["date_create"] ?> / Commentaires : <?php echo $posts->getNumberOfComments($post["id"]) ?></li>
+					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?></li>
+					<li><?php echo postExtract($post) ?>... </li>
+					<li><a href="post.php?id=<?php echo $post["id"] ?>">+ Lire la suite</a></li>
+					
+					<hr>
+				<?php endforeach ?>
+			</ul>
+		</article>
 
-	<ul>
-		<?php foreach ($allPosts as $post) : ?>
-			<li><h1><a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a></h1></li>
-			<li><p>Auteur : <?php echo $post["author_id"] ?></p></li>
-			<li><p>Date de création : <?php echo $post["date_create"] ?></p></li>
-			<li><p><?php echo $post["content"] ?></p></li>
-			<li><a href="post.php?id=<?php echo $post["id"] ?>">Lire la suite</a></li>
-		<?php endforeach ?>
-	</ul>
-	
+		<nav>
+			<?php if($page != 1): ?>
+				<a href="index.php?page=<?php echo $page-1 ?>"> - les <?php echo POSTS_BY_PAGE ?> derniers posts</a>
+			<?php endif; ?>
+			<?php if($page < $numberOfPosts/POSTS_BY_PAGE): ?>
+			<a href="index.php?page=<?php echo $page+1 ?>"> + les <?php echo POSTS_BY_PAGE ?> prochains posts</a>
+			<?php endif; ?>
+		</nav>
+	</div>
 </body>
 </html>

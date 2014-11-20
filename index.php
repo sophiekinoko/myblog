@@ -1,17 +1,8 @@
 <?php
 
-//ici on charge les fichier avec un appel dynamique : on transforme Helper_Config en Helper/Config.php
-Spl_autoload_register("my_autoload");
+require('bootstrap.php');
 
-function my_autoload($class) {
 
-	//str_replace — Remplace toutes les occurrences dans une chaîne
-	$class = str_replace("_","/",$class);
-	$filepath = $class.".php";
-
-	//require est identique à include mise à part le fait que lorsqu'une erreur survient, il produit également une erreur fatale de niveau E_COMPILE_ERROR. En d'autres termes, il stoppera le script alors que include n'émettra qu'une alerte de niveau E_WARNING, ce qui permet au script de continuer.
-	require_once($filepath);
-}
 
 $config = new Helper_Config("config.ini");
 $user = $config->get("user", "database");
@@ -19,17 +10,28 @@ $password = $config->get("password", "database");
 
 $posts = new Model_Post();
 
-// $lastPost = $db->execute("Select * FROM POSTS");
-// var_dump($lastPost);
+//pour aller de page en page avec "Afficher les 5 prochains posts"
+if(isset($_GET['page']))
+{
+     $page=$_GET['page'];
+}
+else // Sinon
+{
+     $page=1; 
+}
 
 
+$latestPosts = $posts->getLatestPosts(POSTS_BY_PAGE);
+$slicePosts = $posts->getSlicePosts($page);
 
-// $allPosts = $db->getPost(1);
-
-
-$allPosts = $posts->getLatestPosts(5);
+//récupère les commentaires du post:
+$numberOfComments = $posts->getNumberOfComments(1);
+$authorName = $posts->getAuthorName(1);
+$numberOfPosts = $posts->getNumberOfPosts();
 
 // var_dump($allPosts);
+
+
 
 
 include "index.phtml";
