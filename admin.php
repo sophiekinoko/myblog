@@ -5,6 +5,11 @@ session_start();
 require('bootstrap.php');
 
 
+if($_SESSION["statut"] != "author") 
+{
+	header("Location:index.php");
+}
+
 
 $config = new Helper_Config("config.ini");
 $user = $config->get("user", "database");
@@ -12,28 +17,23 @@ $password = $config->get("password", "database");
 
 $posts = new Model_Post();
 
-//pour aller de page en page avec "Afficher les 5 prochains posts"
-if(isset($_GET['page']))
+
+
+if(isset($_GET['connexion']) && $_GET['connexion'] == true) 
 {
-     $page=$_GET['page'];
-}
-else // Sinon
-{
-     $page=1; 
+	session_destroy(); 
+	header("Location:index.php");
 }
 
 
-$latestPosts = $posts->getLatestPosts(POSTS_BY_PAGE);
-$slicePosts = $posts->getSlicePosts($page);
+
+$allPosts = $posts->getAllPosts();
+
 
 //récupère les commentaires du post:
 $numberOfComments = $posts->getNumberOfComments(1);
 $authorName = $posts->getAuthorName(1);
 $numberOfPosts = $posts->getNumberOfPosts();
 
-// var_dump($allPosts);
 
-
-
-
-include "index.phtml";
+include "admin.phtml";

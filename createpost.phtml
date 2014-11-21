@@ -8,15 +8,16 @@
 </head>
 <body>
 	<div>
-		<h1>Se Connecter</h1>
-		<form action="login.php" method="post">
+		<article>
+		<h1>Nouvel article</h1>
+			<form action="createpost.php" method="post">
 			<ul>
-				<li>Nom d'utilisateur : <input type="text" name="name"></li>
-				<li>Mot de passe : <input type="password" name="password"></li>
+				<li><input type="text" name="title" value="Titre"></li>
+				<li><textarea name="content" rows="40"></textarea></li>
 				<li><input type="submit" name="submit" value="VALIDER"</li>
-				<?php echo $error; ?>
 			</ul>
 		</form>
+		</article>
 	</div>
 </body>
 </html>

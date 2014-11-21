@@ -14,6 +14,21 @@ private $db;
 		return $this->db->queryOne("SELECT * from POSTS WHERE id = ?", array($id));
 	}
 
+	public function getLastPostId()
+	{
+		return $this->db->queryOne("SELECT id FROM POSTS ORDER BY id DESC LIMIT 1");
+	}
+
+	public function deletePost($id)
+	{
+		return $this->db->execute("DELETE from POSTS WHERE id = ? LIMIT 1", array($id));
+	}
+
+	public function sendPost($title, $content, $author_id)
+	{
+		return $this->db->execute("INSERT INTO POSTS (title, content, author_id) VALUES (?, ?, ?)", array($title, $content, $author_id));
+	}
+
 	public function getLatestPosts($number)
 	{
 		//LIMIT ne marche pas avec un ?
@@ -21,6 +36,11 @@ private $db;
 			$number=POSTS_BY_PAGE;
 		}
 		return $this->db->query("SELECT * from POSTS ORDER BY date_create DESC LIMIT $number");
+	}
+
+	public function getAllPosts()
+	{
+		return $this->db->query("SELECT * from POSTS ORDER BY date_create DESC");
 	}
 
 	public function getComments($postId)

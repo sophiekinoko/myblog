@@ -16,7 +16,7 @@ function my_autoload($class) {
 
 
 //nombre de post par page
-define("POSTS_BY_PAGE", 3);
+define("POSTS_BY_PAGE", 5);
 
 //fonction pour retourner un extrait de texte - segment de chaine
 function postExtract($post) {

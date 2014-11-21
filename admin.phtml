@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Mon Blog</title>
+	<link rel="stylesheet" href="styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div>
+
+		<?php if($_SESSION) 
+		{
+			if($_SESSION["statut"] = "author") 
+			{
+				echo '<a href="admin.php?connexion=true" class="red" >>> DÉCONNEXION</a>';
+			}
+		}
+		else 
+		{
+			header("Location:index.php");
+		}
+		?>
+
+		<article>
+			<ul>
+				<h1>Gestion des articles</h1>
+				<h2><a href="createpost.php" class="green">+ Créer un nouvel article</a></h2>
+				<br><br>
+				<?php foreach ($allPosts as $post) : ?>
+					<li><a href="editpost.php?id=<?php echo $post["id"] ?>" class="green" >✎</a> 
+						<a href="deletepost.php?id=<?php echo $post["id"] ?>" class="red">x</a> 
+						<a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a></li>
+					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?>, le <?php echo $post["date_create"] ?> / <?php echo $posts->getNumberOfComments($post["id"]) ?> commentaires</li>
+					<hr>
+				<?php endforeach ?>
+			</ul>
+		</article>
+
+	</div>
+</body>
+</html>
+
