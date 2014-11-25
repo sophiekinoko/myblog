@@ -13,27 +13,30 @@
 		<a href="admin.php?connexion=true" class="red" >>> DÉCONNEXION</a>
 		<a href="admin.php" class="green" >>> ADMINISTRATION</a>
 		
-	
+
 		<article>
 
-			<h1>Nouvel article</h1>
+			<h1>Modifier un article</h1>
 
-				<form method="post"  enctype="multipart/form-data" action="createpost.php">
+				<form method="post"  enctype="multipart/form-data" action="editpost.php">
 
-					<h2>Choisir une illustration :</h2>
+					<h2>Choisir une nouvelle illustration :</h2>
 
 				    <input type="file" name ="picture" id="upload-id">
 
-					<h2>Création du texte :</h2>
+					<h2>Modification du texte :</h2>
 
 					<ul>
-						<li><input type="text" name="title" value="Titre"></li>
-						<li><textarea name="content" rows="40"></textarea></li>
+						<li><input type="text" name="title" value="<?php echo $originalTitle ?>"></li>
+						<li><textarea name="content" rows="40" ><?php echo $originalContent ?></textarea></li>
+						<li><input type="hidden"  name="post_id"  value="<?php echo $_GET['id'] ?>"></li>
 						<li><input type="submit" name="submit" value="VALIDER"</li>
 					</ul>
 				</form>
 
 		</article>
+
+
 	</div>
 </body>
 </html>

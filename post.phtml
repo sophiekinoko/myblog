@@ -7,24 +7,66 @@
 	<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'></head>
 <body>
 	<div>
-		<h1><a href="index.php">Sciences politiques <br>& Économie générale</a></h1>
+
+		<?php if($_SESSION) 
+		{
+			if($_SESSION["statut"] == "author") 
+			{
+				echo '<a href="admin.php" class="red" >>> ADMINISTRATION</a>' ;
+			}
+		}
+		else 
+		{
+			echo '<ul><li><a href="login.php" class="red" >⛁ CONNEXION</a></li>
+			<li><a href="register.php" class="red" >>> INSCRIPTION</a></li>
+			<li><a href="index.php" class="green"><< REVENIR À L\'ACCUEIL</a></li></ul>' ;
+		}
+		?>
+
+		
+		<h1>
+			<a href="index.php">Sciences politiques <br>& Économie générale</a>
+		</h1>
+
 		<article>
 			<ul>
 				<li><h2><?php echo $myPost["title"] ?></h2></li>
 				<li>Auteur : <?php echo $post->getAuthorName($myPost["id"]) ?></li>
-				<li>Date de création : <?php echo $myPost["date_create"] ?></li>
-				<li><?php echo $myPost["content"] ?></li>
+				<li>Date de création : <?php echo $date ?></li>
+				
+				<?php if ($myPost["image_name"]) : ?>
+				<li><img src="pictures/<?php echo $myPost["image_name"]; ?>"/></li>
+				<?php endif; ?>
+
+				<li><?php echo str_replace("\r", "<br />", $myPost["content"]) ?></li>
 			</ul>
 			<hr>
-			<ul>
-				<li>Commentaires :</li>
+			<ul class="comments">
 				<?php foreach ($allComments as $comment) : ?>
 					<li><?php echo str_replace("\r", "<br />", $comment["content"]) ?></li>
-					<li>De : <?php echo $post->getAuthorCommentName($comment["id"]) ?>, le <?php echo $comment["date"] ?></li>
-				<?php endforeach ?>
+					<li>Par : <?php echo $comments->getAuthorCommentName($comment["id"]) ?>, le <?php echo $date ?>.</li>
+					<hr>
+				<?php endforeach; ?>
 			</ul>
 		</article>
-		<a href="index.php">Revenir à l'accueil</a>
+		
+		<?php if($_SESSION) 
+		{
+			echo '<a href="createcomment.php?id='.$_GET["id"].'" class="green">Ajouter un commentaire</a><br/><br/>' ;
+		}
+		?>
+
+		
+		<nav>
+			<?php if($prevpostid["id"] != null): ?>
+				<a href="post.php?id=<?php echo $prevpostid["id"] ?>"> << Billet précédent</a>
+			<?php endif; ?>
+			<?php if($nextpostid["id"] != null): ?>
+				<a href="post.php?id=<?php echo $nextpostid["id"] ?>"> >> Billet suivant</a>
+			<?php endif; ?>
+		</nav>
+
 	</div>
 </body>
 </html>
+

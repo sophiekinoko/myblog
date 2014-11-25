@@ -5,12 +5,12 @@ session_start();
 require('bootstrap.php');
 
 
-
 $config = new Helper_Config("config.ini");
 $user = $config->get("user", "database");
 $password = $config->get("password", "database");
 
 $posts = new Model_Post();
+$comments = new Model_Comment();
 
 
 if($_SESSION["statut"] != "author") 

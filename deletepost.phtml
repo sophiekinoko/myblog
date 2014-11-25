@@ -8,14 +8,18 @@
 </head>
 <body>
 	<div>
+
+		<a href="admin.php?connexion=true" class="red" >>> DÉCONNEXION</a>
+		<a href="admin.php" class="green" >>> ADMINISTRATION</a>
+
+		
 		<article>
-		<?php echo "Attention, ".$_SESSION["name"]." 😱"; ?>
 		<h1>Suppression d'un article</h1>
 			<ul>
 				<li>Es-tu sûr(e) de vouloir supprimer l'article : </li>
 				<li><h2><a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $postTitle ?> ?</a></h2></li>
 				<li>Posté le <?php echo $post["date_create"] ?> par <?php echo $posts->getAuthorName($post["id"]) ?></li>
-				 <li><?php echo $posts->getNumberOfComments($post["id"]) ?> commentaires.</li>
+				 <li><?php echo $comments->getNumberOfComments($post["id"]) ?> commentaires.</li>
 			</ul>
 			
 			<a href="deletepost.php?id=<?= $post['id'] ?>&confirm=true" class="red">OUI</a>

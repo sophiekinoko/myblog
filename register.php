@@ -1,5 +1,5 @@
 <?php
-
+//la variable $_SESSION existe toujours, mais elle est vide par défaut. pour dire de remplir le tableau SESSION, on met :
 session_start();
 
 require('bootstrap.php');

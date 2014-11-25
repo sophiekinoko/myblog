@@ -5,12 +5,6 @@ session_start();
 require('bootstrap.php');
 
 
-if($_SESSION["statut"] != "author") 
-{
-	header("Location:index.php");
-}
-
-
 $config = new Helper_Config("config.ini");
 $user = $config->get("user", "database");
 $password = $config->get("password", "database");
@@ -19,19 +13,18 @@ $posts = new Model_Post();
 $comments = new Model_Comment();
 
 
-
-if(isset($_GET['connexion']) && $_GET['connexion'] == true) 
+if(! isset($_SESSION["statut"]))
 {
-	
-	$_SESSION = array();
-	session_destroy(); 
 	header("Location:index.php");
 }
 
+if($_POST) {
+	$content = $_POST["content"];
+	$author_id = $_SESSION["id"];
+	$post_id = $_GET["id"];
+	$comments->sendComment($content, $author_id, $post_id);
+	header("Location:post.php?id=$post_id");
+}
 
-$allPosts = $posts->getAllPosts();
 
-
-$numberOfPosts = $posts->getNumberOfPosts();
-
-include "admin.phtml";
+include "createcomment.phtml";

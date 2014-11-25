@@ -20,6 +20,7 @@ if(isset($_POST["name"]) && isset($_POST["password"]))
 
 	if($user) 
 	{
+		$_SESSION["login"] = true;
 		$_SESSION["name"] = $user["name"];
 		$_SESSION["id"] = $user["id"];
 		$_SESSION["statut"] = $user["statut"];

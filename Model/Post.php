@@ -19,6 +19,16 @@ private $db;
 		return $this->db->queryOne("SELECT id FROM POSTS ORDER BY id DESC LIMIT 1");
 	}
 
+	public function getPrevPostId($id)
+	{
+		return $this->db->queryOne("SELECT id FROM POSTS WHERE id < ? ORDER BY id DESC LIMIT 1", array($id));
+	}
+
+	public function getNextPostId($id)
+	{
+		return $this->db->queryOne("SELECT id FROM POSTS WHERE id > ? ORDER BY id ASC LIMIT 1", array($id));
+	}
+
 	public function deletePost($id)
 	{
 		return $this->db->execute("DELETE from POSTS WHERE id = ? LIMIT 1", array($id));
@@ -27,6 +37,21 @@ private $db;
 	public function sendPost($title, $content, $author_id)
 	{
 		return $this->db->execute("INSERT INTO POSTS (title, content, author_id) VALUES (?, ?, ?)", array($title, $content, $author_id));
+	}
+
+	public function modifyPost($title, $content, $post_id, $author_id)
+	{
+		return $this->db->execute("UPDATE POSTS SET title=?, content=?, author_id=? WHERE id= ?", array($title, $content, $author_id, $post_id));
+	}
+
+	public function updatePost($data, $post_id)
+	{
+		$text = "UPDATE POSTS SET ";
+		foreach ($data as $key => $value) {
+			$text .= $key."=:".$key.", ";
+		}
+		$data['id'] = $post_id;
+		return $this->db->execute(substr($text, 0, -2)." WHERE id= :id", $data);
 	}
 
 	public function getLatestPosts($number)
@@ -41,17 +66,6 @@ private $db;
 	public function getAllPosts()
 	{
 		return $this->db->query("SELECT * from POSTS ORDER BY date_create DESC");
-	}
-
-	public function getComments($postId)
-	{
-		return $this->db->query("SELECT * from COMMENTS WHERE post_id = ?", array($postId));
-	}
-
-	public function getNumberOfComments($postId)
-	{
-		$variable = $this->db->queryOne("SELECT COUNT(*) AS number FROM COMMENTS WHERE post_id = ?", array($postId));
-		return $variable["number"];
 	}
 
 	public function getSlicePosts($page)
@@ -74,9 +88,4 @@ private $db;
 		return $variable["name"];
 	}
 
-	public function getAuthorCommentName($postId)
-	{
-		$variable = $this->db->queryOne("SELECT name FROM USERS INNER JOIN COMMENTS ON USERS.id = COMMENTS.author_id WHERE COMMENTS.id = ?", array($postId));
-		return $variable["name"];
-	}
 }

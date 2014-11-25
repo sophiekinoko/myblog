@@ -9,18 +9,7 @@
 <body>
 	<div>
 
-		<?php if($_SESSION) 
-		{
-			if($_SESSION["statut"] = "author") 
-			{
-				echo '<a href="admin.php?connexion=true" class="red" >>> DÉCONNEXION</a>';
-			}
-		}
-		else 
-		{
-			header("Location:index.php");
-		}
-		?>
+		<a href="admin.php?connexion=true" class="red" >⚡ DÉCONNEXION</a>
 
 		<article>
 			<ul>
@@ -29,9 +18,9 @@
 				<br><br>
 				<?php foreach ($allPosts as $post) : ?>
 					<li><a href="editpost.php?id=<?php echo $post["id"] ?>" class="green" >✎</a> 
-						<a href="deletepost.php?id=<?php echo $post["id"] ?>" class="red">x</a> 
+						<a href="deletepost.php?id=<?php echo $post["id"] ?>" class="red">☒</a> 
 						<a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a></li>
-					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?>, le <?php echo $post["date_create"] ?> / <?php echo $posts->getNumberOfComments($post["id"]) ?> commentaires</li>
+					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?>, le <?php echo $post["date_create"] ?> / <?php echo $comments->getNumberOfComments($post["id"]) ?> commentaires</li>
 					<hr>
 				<?php endforeach ?>
 			</ul>
@@ -40,4 +29,3 @@
 	</div>
 </body>
 </html>
-
