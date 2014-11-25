@@ -8,20 +8,7 @@
 <body>
 	<div>
 
-		<?php if($_SESSION) 
-		{
-			if($_SESSION["statut"] == "author") 
-			{
-				echo '<a href="admin.php" class="red" >>> ADMINISTRATION</a>' ;
-			}
-		}
-		else 
-		{
-			echo '<ul><li><a href="login.php" class="red" >⛁ CONNEXION</a></li>
-			<li><a href="register.php" class="red" >>> INSCRIPTION</a></li>
-			<li><a href="index.php" class="green"><< REVENIR À L\'ACCUEIL</a></li></ul>' ;
-		}
-		?>
+		<?php include "nav.php" ?>
 
 		
 		<h1>
@@ -32,7 +19,7 @@
 			<ul>
 				<li><h2><?php echo $myPost["title"] ?></h2></li>
 				<li>Auteur : <?php echo $post->getAuthorName($myPost["id"]) ?></li>
-				<li>Date de création : <?php echo $date ?></li>
+				<li>Écrit le : <?php echo $date ?></li>
 				
 				<?php if ($myPost["image_name"]) : ?>
 				<li><img src="pictures/<?php echo $myPost["image_name"]; ?>"/></li>
@@ -43,8 +30,8 @@
 			<hr>
 			<ul class="comments">
 				<?php foreach ($allComments as $comment) : ?>
-					<li><?php echo str_replace("\r", "<br />", $comment["content"]) ?></li>
-					<li>Par : <?php echo $comments->getAuthorCommentName($comment["id"]) ?>, le <?php echo $date ?>.</li>
+					<li><em><?php echo htmlentities(str_replace("\r", "<br />", $comment["content"])) ?></em></li>
+					<li>Par : <?php echo htmlentities($comments->getAuthorCommentName($comment["id"])) ?>, le <?php echo $date ?>.</li>
 					<hr>
 				<?php endforeach; ?>
 			</ul>

@@ -9,19 +9,7 @@
 <body>
 	<div>
 
-		<?php if($_SESSION) 
-		{
-			if($_SESSION["statut"] == "author") 
-			{
-				echo '<a href="admin.php" class="red" >>> ADMINISTRATION</a>' ;
-			}
-		}
-		else 
-		{
-			echo '<ul><li><a href="login.php" class="red" >⚡ CONNEXION</a></li>
-			<li><a href="register.php" class="red" >⛁ INSCRIPTION</a></li></ul>' ;
-		}
-		?>
+		<?php include "nav.php" ?>
 
 		<h1><a href="index.php">Sciences politiques <br>& Économie générale</a></h1>
 		<article>
@@ -31,7 +19,7 @@
 
 					<li><h2><a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a></h2></li>
 
-					<li>Le <?php echo substr($post["date_create"],0,10) ?> / Commentaires : <?php echo $comments->getNumberOfComments($post["id"]) ?></li>
+					<li>Le <?php echo date("d/m/Y",strtotime($post["date_create"])) ?> / Commentaires : <?php echo $comments->getNumberOfComments($post["id"]) ?></li>
 
 					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?></li>
 

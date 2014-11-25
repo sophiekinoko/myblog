@@ -8,15 +8,20 @@
 </head>
 <body>
 	<div>
-		<h1>Se Connecter</h1>
+
+		<h1><a href="index.php">Sciences politiques <br>& Économie générale</a></h1>
+		<br>
+		<h2>Se connecter</h2>
+		<br>
 		<form action="login.php" method="post">
 			<ul>
-				<li>Nom d'utilisateur : <input type="text" name="name"></li>
-				<li>Mot de passe : <input type="password" name="password"></li>
+				<li>Nom d'utilisateur : <input type="text" name="name" required></li>
+				<li>Mot de passe : <input type="password" name="password" required></li>
 				<li><input type="submit" name="submit" value="VALIDER"</li>
 				<?php echo $error; ?>
 			</ul>
 		</form>
+
 	</div>
 </body>
 </html>

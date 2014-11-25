@@ -28,7 +28,7 @@ $nextpostid = $post->getNextPostId($_GET["id"]);
 
 $prevpostid = $post->getPrevPostId($_GET["id"]);
 
-if(!$myPost) {
+if(!isset($_GET["id"])) {
 	header("Location:404.html");
 }
 

@@ -30,7 +30,7 @@ if(isset($_POST["name"]) && isset($_POST["password"]) && isset($_POST["password2
 
 else
 {
-	$message = "<li>Veillez à remplir tous les champs.</li>";
+	$message = "<li><span class='rouge'>* </span> Merci de remplir tous les champs.</li>";
 }
 
 

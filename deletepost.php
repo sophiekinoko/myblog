@@ -29,4 +29,9 @@ if(isset($_GET['confirm']) && $_GET['confirm'] == true)
 }
 
 
+if(!isset($_GET["id"])) {
+	header("Location:404.html");
+}
+
+
 include "deletepost.phtml";

@@ -8,12 +8,16 @@
 </head>
 <body>
 	<div>
-		<h1>S'inscrire</h1>
+
+		<h1><a href="index.php">Sciences politiques <br>& Économie générale</a></h1>
+		<br>
+		<h2>S'inscrire</h2>
+		<br>
 		<form action="register.php" method="post">
 			<ul>
-				<li>Nom d'utilisateur : <input type="text" name="name"></li>
-				<li>Mot de passe : <input type="password" name="password"></li>
-				<li>Confirmation du mot de passe : <input type="password" name="password2"></li>
+				<li><span class="rouge">* </span>Nom d'utilisateur : <input type="text" name="name" placeholder="Choisissez un nom" required></li>
+				<li><span class="rouge">* </span> Mot de passe : <input type="password" name="password" placeholder="Choisissez un mot de passe" required></li>
+				<li><span class="rouge">* </span> Confirmation du mot de passe : <input type="password" name="password2"  placeholder="Confirmez votre mot de passe" required></li>
 				<!-- <li>
 					<input type="radio" name="statut" value="author" id="author" class="radio" /> <label for="author">Auteur</label><br />
 					<input type="radio" name="statut" value="visitor" id="visitor" class="radio" checked /> <label for="visitor">Visiteur</label>

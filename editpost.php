@@ -38,6 +38,11 @@ if(isset ($_POST["title"])) {
 	exit();
 }
 
+
+if(!isset($_GET["id"])) {
+	header("Location:404.html");
+}
+
 //pour appeler le titre et le content du post original
 $originalPost = $posts->getPost($_GET["id"]);
 $originalTitle = $originalPost["title"];
