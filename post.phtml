@@ -26,7 +26,17 @@
 				<?php endif; ?>
 
 				<li><?php echo str_replace("\r", "<br />", $myPost["content"]) ?></li>
+			
+
+				<?php foreach($tagsList as $tag) 
+				{
+					if($tags != null) {
+					echo '<span class="tag">'.$tag.'</span>';
+					}
+				 }  ?> 
+
 			</ul>
+
 			<hr>
 			<ul class="comments">
 				<?php foreach ($allComments as $comment) : ?>

@@ -88,4 +88,24 @@ private $db;
 		return $variable["name"];
 	}
 
+	public function getTags($postId) {
+		$variable = $this->db->queryOne("SELECT GROUP_CONCAT(tag_name) AS tags_list FROM TAGS WHERE post_id = ?", array($postId));
+		return $variable['tags_list'];
+	}
+
+	public function sendTags($post_id, $tag_array)
+	{
+		foreach ($tag_array as $key => $value) {
+			$tag = trim($value);
+			if ($tag != "") {
+			$this->db->execute("INSERT INTO TAGS (post_id, tag_name) VALUES (?, ?)", array($post_id, $tag));
+			}
+		}
+	}
+
+	public function removeTags($post_id)
+	{
+		$this->db->execute("DELETE FROM TAGS WHERE post_id = ?", array($post_id));
+	}
+
 }

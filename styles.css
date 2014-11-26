@@ -86,3 +86,27 @@ button {
 .comments {
 	font-size: 0.8em;
 }
+
+@media screen and (max-width: 800px) and (min-width: 480px){
+	div {
+	width: 70%;
+	}
+}
+
+
+@media screen and (max-width: 480px) {
+		div {
+	width: 90%;
+	}
+}
+
+
+.tag {
+	background-color: #4ECDC4;
+	padding: 0 5px;
+	margin-right: 5px;
+}
+
+.tag:before {
+	content: "☞ ";
+}

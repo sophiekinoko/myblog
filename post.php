@@ -15,6 +15,8 @@ $comments = new Model_Comment();
 
 $myPost = $post->getPost($_GET["id"]);
 
+
+
 //récupère les commentaire avec l'id du post:
 $allComments = $comments->getComments($_GET["id"]);
 
@@ -23,11 +25,21 @@ $allComments = $comments->getComments($_GET["id"]);
 $date = date("d/m/Y",strtotime($myPost["date_create"]));
 
 
+//TAGS
+$tags = $post->getTags($_GET["id"]);
+//var_dump($tags);
+$tagsList = explode(",", $tags);
+//var_dump($tagsList);
 
+
+
+
+
+//NAV BAS
 $nextpostid = $post->getNextPostId($_GET["id"]);
-
 $prevpostid = $post->getPrevPostId($_GET["id"]);
 
+//SI PAS D'ID DANS LA BARRE DE NAV
 if(!isset($_GET["id"])) {
 	header("Location:404.html");
 }

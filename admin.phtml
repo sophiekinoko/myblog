@@ -11,6 +11,7 @@
 
 		<?php include "nav.php" ?>
 
+		<h1><a href="index.php">Sciences politiques <br>& Économie générale</a></h1>
 		<article>
 			<ul>
 				<h1>Gestion des articles</h1>
@@ -19,8 +20,10 @@
 				<?php foreach ($allPosts as $post) : ?>
 					<li><a href="editpost.php?id=<?php echo $post["id"] ?>" class="green" >✎</a> 
 						<a href="deletepost.php?id=<?php echo $post["id"] ?>" class="red">☒</a> 
-						<a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a></li>
-					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?>, le <?php echo $post["date_create"] ?> / <?php echo $comments->getNumberOfComments($post["id"]) ?> commentaires</li>
+						<a href="post.php?id=<?php echo $post["id"] ?>"><?php echo $post["title"] ?></a>
+					</li>
+					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?>, le <?php echo date("d/m/Y",strtotime($post["date_create"])) ?> / <?php echo $comments->getNumberOfComments($post["id"]) ?> commentaires
+					</li>
 					<hr>
 				<?php endforeach ?>
 			</ul>

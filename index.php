@@ -4,8 +4,6 @@ session_start();
 
 require('bootstrap.php');
 
-
-
 $config = new Helper_Config("config.ini");
 $user = $config->get("user", "database");
 $password = $config->get("password", "database");
@@ -29,7 +27,7 @@ $slicePosts = $posts->getSlicePosts($page);
 //récupère les commentaires du post:
 $numberOfPosts = $posts->getNumberOfPosts();
 
-// var_dump($allPosts);
+//var_dump($numberOfPosts);
 
 //var_dump($_SESSION);
 

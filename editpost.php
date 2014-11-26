@@ -34,6 +34,16 @@ if(isset ($_POST["title"])) {
 			$posts->updatePost(array('image_name'=>($post_id.".".$extensionFile)), $post_id);
 		}
 	}
+
+	//TAGS
+	if(isset ($_POST["tags"])) {
+	$tags = $_POST["tags"];
+	$listTags = explode(",", $tags);
+	$posts->removeTags($post_id);
+	$posts->sendTags($post_id, $listTags);
+	}
+
+
 	header("Location:post.php?id=$post_id");
 	exit();
 }
@@ -45,6 +55,11 @@ if(!isset($_GET["id"])) {
 
 //pour appeler le titre et le content du post original
 $originalPost = $posts->getPost($_GET["id"]);
+
+$tags = $posts->getTags($_GET["id"]);
+
+
+//var_dump($originalPost);
 $originalTitle = $originalPost["title"];
 $originalContent = $originalPost["content"];
 
