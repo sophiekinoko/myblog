@@ -108,4 +108,9 @@ private $db;
 		$this->db->execute("DELETE FROM TAGS WHERE post_id = ?", array($post_id));
 	}
 
+	public function getSliceTags($tag)
+	{
+		return $this->db->query("SELECT * FROM POSTS INNER JOIN TAGS ON POSTS.id = TAGS.post_id WHERE tag_name=?", array($tag));
+	}
+
 }

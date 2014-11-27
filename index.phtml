@@ -23,6 +23,21 @@
 
 					<li>Par <?php echo $posts->getAuthorName($post["id"]) ?></li>
 
+					<?php $tags = explode(",",$posts->getTags($post["id"])) ?>
+
+					<?php if($tags[0] != ""): ?>
+					<li>
+						<?php foreach($tags as $tag): ?>
+
+							<a href="tag.php?tag=<?php echo $tag ?>" ><span class="tag"><?php echo $tag ?></a></span>
+
+						<?php endforeach ?>
+					</li>
+					<?php endif ?>
+					
+				
+
+
 					<?php if ($post["image_name"]) : ?>
 						<li><img src="pictures/<?php echo $post["image_name"]; ?>"/></li>
 					<?php endif; ?>

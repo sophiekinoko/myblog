@@ -26,15 +26,16 @@
 				<?php endif; ?>
 
 				<li><?php echo str_replace("\r", "<br />", $myPost["content"]) ?></li>
-			
 
-				<?php foreach($tagsList as $tag) 
-				{
-					if($tags != null) {
-					echo '<span class="tag">'.$tag.'</span>';
-					}
-				 }  ?> 
+				 <?php if($tags[0] != ""): ?>
+					<li>
+						<?php foreach($tagsList as $tag): ?>
 
+							<a href="tag.php?tag=<?php echo $tag ?>" ><span class="tag"><?php echo $tag ?></a></span>
+
+						<?php endforeach ?>
+					</li>
+					<?php endif ?>
 			</ul>
 
 			<hr>

@@ -27,6 +27,9 @@ $slicePosts = $posts->getSlicePosts($page);
 //récupère les commentaires du post:
 $numberOfPosts = $posts->getNumberOfPosts();
 
+
+
+
 //var_dump($numberOfPosts);
 
 //var_dump($_SESSION);

@@ -12,6 +12,7 @@ class Helper_Database {
 		$name = $config->get("name", "database");
 		$this->db = new PDO("mysql:host=localhost;dbname=$name",$user,$password);
 		$this->db->exec("SET NAMES UTF8");
+		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
 	public function query($queryString, $data=array()) {
